@@ -1,7 +1,6 @@
 FROM cyberdojofoundation/ubuntu-build-essential:18.04
 LABEL maintainer=jon@jaggersoft.com
 
-RUN apt-get isntall --yes snap
+RUN apt-get install --yes snap
 RUN snap install zig --classic --edge
-
 COPY red_amber_green.rb /usr/local/bin
