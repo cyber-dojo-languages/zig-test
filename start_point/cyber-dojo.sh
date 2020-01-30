@@ -1,0 +1,2 @@
+
+zig test test-*.zig

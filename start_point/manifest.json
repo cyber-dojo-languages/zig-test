@@ -1,0 +1,13 @@
+{
+  "display_name": "Zig, test",
+
+  "visible_filenames": [
+    "test-hiker.zig",
+    "hiker.zig",
+    "cyber-dojo.sh"
+  ],
+
+  "image_name": "cyberdojofoundation/zig-test",
+
+  "filename_extension": ".zig"
+}
