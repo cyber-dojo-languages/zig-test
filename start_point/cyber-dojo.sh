@@ -1,2 +1,2 @@
 
-zig test *.zig
+zig test test-*.zig

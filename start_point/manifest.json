@@ -7,6 +7,10 @@
     "cyber-dojo.sh"
   ],
 
+  "hidden_filenames": [
+    "zig-cache/.*"
+  ],
+
   "image_name": "cyberdojofoundation/zig-test",
 
   "filename_extension": ".zig"
