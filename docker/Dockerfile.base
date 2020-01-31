@@ -1,6 +1,23 @@
 FROM cyberdojofoundation/ubuntu-build-essential:18.04
 LABEL maintainer=jon@jaggersoft.com
 
-RUN apt-get install --yes snap
-RUN snap install zig --classic --edge
+# https://stackoverflow.com/questions/58292862/how-to-install-homebrew-on-ubuntu-inside-docker-container
+
+RUN apt-get update && \
+    apt-get install build-essential curl file git ruby-full locales --no-install-recommends -y && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN localedef -i en_US -f UTF-8 en_US.UTF-8
+
+RUN useradd -m -s /bin/bash linuxbrew && \
+    echo 'linuxbrew ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
+
+USER linuxbrew
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+
+USER root
+ENV PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
+
+RUN brew install zig --HEAD
+
 COPY red_amber_green.rb /usr/local/bin
