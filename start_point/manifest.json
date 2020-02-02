@@ -11,7 +11,7 @@
     "zig-cache/.*"
   ],
 
-  "image_name": "cyberdojofoundation/zig-test",
+  "image_name": "cyberdojofoundation/zig_test",
 
   "filename_extension": ".zig"
 }
