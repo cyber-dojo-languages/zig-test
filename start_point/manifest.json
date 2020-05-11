@@ -1,17 +1,14 @@
 {
   "display_name": "Zig, test",
-
-  "visible_filenames": [
+  "image_name": "cyberdojofoundation/zig_test",
+  "visible_filenames":
+  [
     "test-hiker.zig",
     "hiker.zig",
     "cyber-dojo.sh"
   ],
-
-  "hidden_filenames": [
-    "zig-cache/.*"
-  ],
-
-  "image_name": "cyberdojofoundation/zig_test",
-
-  "filename_extension": ".zig"
+  "filename_extension": [ ".zig" ],
+  "max_seconds": 10,
+  "tab_size": 4,
+  "hidden_filenames":  [ "zig-cache/.*" ]
 }
