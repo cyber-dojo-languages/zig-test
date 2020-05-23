@@ -9,6 +9,5 @@
   ],
   "filename_extension": [ ".zig" ],
   "max_seconds": 10,
-  "tab_size": 4,
-  "hidden_filenames":  [ "zig-cache/.*" ]
+  "tab_size": 4
 }
