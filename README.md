@@ -1,6 +1,6 @@
-[![CircleCI](https://circleci.com/gh/cyber-dojo-languages/zig-test.svg?style=svg)](https://circleci.com/gh/cyber-dojo-languages/zig-test)
+[![Github Action (main)](https://github.com/cyber-dojo-languages/zig-test/actions/workflows/main.yml/badge.svg)](https://github.com/cyber-dojo-languages/zig-test/actions)
 
-## display_name="Zig, test"
-## image_name="cyberdojofoundation/zig_test"
+## display_name="Zig 0.16.0, test"
+## image_name=[ghcr.io/cyber-dojo-languages/zig_test](https://ghcr.io/cyber-dojo-languages/zig_test)
 
 ![cyber-dojo.org home page](https://github.com/cyber-dojo/cyber-dojo/blob/master/shared/home_page_snapshot.png)
