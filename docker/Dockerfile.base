@@ -1,2 +1,9 @@
 FROM ghcr.io/cyber-dojo-languages/zig:485b8d9
 LABEL maintainer=jon@jaggersoft.com
+
+# A kata's test-run reads a zig cache warmed here instead of recompiling zig's
+# standard library and test runner in every fresh container. The script explains
+# where the warming has to happen and why, and fails the build if a kata would
+# not hit the cache.
+COPY install.sh .
+RUN bash ./install.sh && rm ./install.sh
