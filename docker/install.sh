@@ -68,9 +68,14 @@ HOME="${SANDBOX_HOME}" zig test -fstrip "${TARGET_OPTS[@]}" hiker_test.zig || tr
 # built on an amd64 machine. Emulated, a warm run takes seconds where it takes a
 # fraction of one natively, so any threshold that fits one fails the other. A
 # ratio holds either way: both runs are slowed by the same emulation.
+#
+# The value is one no start-point uses. Whatever is compiled last is left in the
+# cache complete, so compiling the answer that makes the kata's test pass would
+# hand that one case a hit no learner's own work gets, and the green duration
+# measured from it would flatter every other.
 cat > hiker.zig << 'EOF'
 pub fn answer() i32 {
-    return 6 * 7;
+    return 6 * 3;
 }
 EOF
 
