@@ -10,10 +10,12 @@ set -Eeu -o pipefail
 #
 # Two things make the warmed cache reachable from a kata.
 #
-# The first is the directory. Zig reuses its own compiled output for a source
-# file that has changed only when the compilation happens in the directory that
-# produced it, so the warming has to run in /sandbox, where a kata runs. Warming
-# elsewhere leaves a cache that is never hit and costs the full rebuild again.
+# The first is the target, which has to be spelled out rather than detected.
+# Zig keys its cache on the target, and a detected target carries the kernel
+# version and cpu of the machine doing the detecting. Warmed with a detected
+# target, the cache is keyed to the machine that built the image and every
+# other machine recompiles from scratch, which is what makes this the one
+# setting that has to match cyber-dojo.sh exactly.
 #
 # The second is that the files warmed with are deleted afterwards. Zig's cache
 # manifest records the source files by path and re-stats them, so a source file
@@ -23,6 +25,9 @@ set -Eeu -o pipefail
 
 readonly SANDBOX_DIR=/sandbox
 readonly SANDBOX_HOME=/home/sandbox
+
+# Must stay identical to the options in the start-point's cyber-dojo.sh.
+readonly TARGET_OPTS=(-mcpu=baseline -target native-linux.5.10...5.10-musl)
 
 mkdir -p "${SANDBOX_DIR}" && cd "${SANDBOX_DIR}"
 
@@ -48,7 +53,7 @@ EOF
 # that produced it, so warming with different ones would leave a cache a kata
 # cannot use. The test fails, which is the point of the kata's starting state,
 # so the exit status is not an error here.
-HOME="${SANDBOX_HOME}" zig test -fstrip hiker_test.zig || true
+HOME="${SANDBOX_HOME}" zig test -fstrip "${TARGET_OPTS[@]}" hiker_test.zig || true
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # A cache is keyed on the compiler and the flags that filled it. If those ever
@@ -72,7 +77,7 @@ EOF
 zig_test_seconds()
 {
   local -r cache_dir="${1}"
-  { TIMEFORMAT='%3R'; time ZIG_GLOBAL_CACHE_DIR="${cache_dir}" zig test -fstrip hiker_test.zig > /dev/null 2>&1; } 2>&1
+  { TIMEFORMAT='%3R'; time ZIG_GLOBAL_CACHE_DIR="${cache_dir}" zig test -fstrip "${TARGET_OPTS[@]}" hiker_test.zig > /dev/null 2>&1; } 2>&1
 }
 
 readonly COLD_SECONDS=$(zig_test_seconds /tmp/cold-zig-cache)
