@@ -1,4 +1,4 @@
-FROM ghcr.io/cyber-dojo-languages/zig:67997b0
+FROM ghcr.io/cyber-dojo-languages/zig:21a25fe@sha256:d84bff6850fff0b5ae74ce11b374e68013c78097212ed5bbd27fac43c200fd80
 LABEL maintainer=jon@jaggersoft.com
 
 # A kata's test-run reads a zig cache warmed here instead of recompiling zig's
